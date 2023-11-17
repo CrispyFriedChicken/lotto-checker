@@ -1,4 +1,5 @@
 module.exports = {
+    logFilePath: 'result.txt',
     // 中獎號碼（陣列）: 包含當期抽選的中獎號碼，每個號碼為一個數字
     prizeNumbers: [15, 30, 31, 34, 40, 45],
 

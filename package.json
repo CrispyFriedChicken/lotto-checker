@@ -1,0 +1,14 @@
+{
+  "name": "lotto-checker",
+  "version": "1.0.0",
+  "description": "1. �ھڷ��������X, �S�O��, �ۤv�ʶR���ֳz�︹, �����[�}���ֳz���ק�`config/index.js`\r 2. cd `lotto-checker`\r 3. ���楻�{��`node main.js`�æL�X�������G\r 4. ��X���G�p�U",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "fs": "^0.0.1-security"
+  }
+}

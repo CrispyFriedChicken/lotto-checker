@@ -1,4 +1,5 @@
-const {prizeNumbers, prizeSpecialNumber, myNumbersList, prizeExternalNumbersList} = require('./config');
+const {logFilePath, prizeNumbers, prizeSpecialNumber, myNumbersList, prizeExternalNumbersList} = require('./config');
+const fs = require('fs');
 
 // 共用的匹配計數函數
 function countMatches(numbers, targetNumbers) {
@@ -28,7 +29,7 @@ function checkNumbers() {
         const hasSpecial = myNumbers.includes(prizeSpecialNumber);
         const prize = getPrizeDescription(matchCount, hasSpecial);
         const type = '大樂透';
-        console.log(`${type},${prize},中${matchCount}碼${hasSpecial ? ' + 中特別號' : ''},我的號碼:${JSON.stringify(myNumbers)}`)
+        log(`${type},${prize},中${matchCount}碼${hasSpecial ? ' + 中特別號' : ''},我的號碼:${JSON.stringify(myNumbers)}`)
     });
 }
 
@@ -38,10 +39,31 @@ function checkExternalNumbers() {
             const matchCount = countMatches(myNumbers, prizeExternalNumbers);
             const prize = matchCount === 6 ? '中獎' : '沒中';
             const type = '活動加碼';
-            console.log(`${type},${prize},中${matchCount}碼,我的號碼:${JSON.stringify(myNumbers)},加開號碼:${JSON.stringify(prizeExternalNumbers)}`)
+            log(`${type},${prize},中${matchCount}碼,我的號碼:${JSON.stringify(myNumbers)},加開號碼:${JSON.stringify(prizeExternalNumbers)}`)
         });
     });
 }
 
+// 檢查檔案是否存在，如果存在則清空，否則創建新檔案
+function initializeLogFile() {
+    if (fs.existsSync(logFilePath)) {
+        // 清空檔案內容
+        fs.writeFileSync(logFilePath, '', 'utf8');
+    } else {
+        // 創建新檔案
+        fs.writeFileSync(logFilePath, '', 'utf8');
+    }
+}
+
+// 將資訊寫入檔案的函數
+function log(message) {
+    console.log(message);
+    fs.appendFileSync(logFilePath, message + '\n', 'utf8');
+}
+
+// 初始化日誌檔案
+initializeLogFile(logFilePath);
+
+// 測試寫入資訊到日誌檔案
 checkNumbers();
 checkExternalNumbers();
